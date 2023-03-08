@@ -1,0 +1,268 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'96\'be\'92\'a9;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang17 #  Raisetech \'91\'e6\'8c\'dc\'89\'f1\'8d\'75\'8b\'60\par
+\par
+##  \'89\'db\'91\'e8\'82\'cc\'97\'ac\'82\'ea\par
+\par
+##  \'91\'67\'82\'dd\'8d\'9e\'82\'dd\'83\'54\'81\'5b\'83\'6f\'81\'5b\'82\'c5\'82\'cc\'8b\'4e\'93\'ae\par
+\'81\'401. yum\'83\'41\'83\'62\'83\'76\'83\'66\'81\'5b\'83\'67\par
+\par
+```\par
+\par
+$ sudo yum update -y\par
+\par
+```\par
+2.Node.js\'82\'e2Yarn\'82\'c8\'82\'c7\'82\'cc\'95\'4b\'97\'76\'82\'c8\'83\'70\'83\'62\'83\'50\'81\'5b\'83\'57\'82\'f0\'83\'5f\'83\'45\'83\'93\'83\'8d\'81\'5b\'83\'68\par
+```\par
+\par
+$ curl -fsSL {{\field{\*\fldinst{HYPERLINK https://rpm.nodesource.com/setup_16.x }}{\fldrslt{https://rpm.nodesource.com/setup_16.x\ul0\cf0}}}}\f0\fs22  | sudo bash -\par
+$ curl -sL {{\field{\*\fldinst{HYPERLINK https://dl.yarnpkg.com/rpm/yarn.repo }}{\fldrslt{https://dl.yarnpkg.com/rpm/yarn.repo\ul0\cf0}}}}\f0\fs22  | sudo tee /etc/yum.repos.d/yarn.repo\par
+$ sudo yum -y install git gcc clang openssl-devel zlib-devel mysql-devel nodejs yarn\par
+\par
+```\par
+3. rbenv \'82\'c6 ruby-build \'82\'f0\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+\par
+$ curl -fsSL {{\field{\*\fldinst{HYPERLINK https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer }}{\fldrslt{https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer\ul0\cf0}}}}\f0\fs22  | bash\par
+\par
+```\par
+4. rbenv \'82\'cc\'83\'70\'83\'58\'82\'f0\'92\'ca\'82\'b5\'81\'41\'8f\'89\'8a\'fa\'90\'dd\'92\'e8\par
+\par
+```\par
+\par
+$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile\par
+$ ~/.rbenv/bin/rbenv init\par
+$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile\par
+$ source .bash_profile\par
+\par
+```\par
+5. ruby\'82\'f0\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+\par
+$ rbenv install -v 3.1.2\par
+$ rbenv rehash\par
+$ rbenv global 3.1.2\par
+$ ruby -v\par
+\par
+```\par
+6. bundler\'82\'c6rails\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+\par
+$ gem install bundler:2.3.14\par
+$ gem install rails 7.0.4\par
+\par
+```\par
+7. Mysql\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+\par
+$ wget {{\field{\*\fldinst{HYPERLINK https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm }}{\fldrslt{https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm\ul0\cf0}}}}\f0\fs22\par
+\par
+$ sudo yum localinstall -y mysql80-community-release-el7-7.noarch.rpm\par
+\par
+$ sudo yum install -y mysql-community-devel\par
+\par
+$ sudo yum install -y mysql-community-server\par
+\par
+```\par
+8. \'83\'54\'83\'93\'83\'76\'83\'8b\'83\'41\'83\'76\'83\'8a\'83\'50\'81\'5b\'83\'56\'83\'87\'83\'93\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+\par
+$ git clone {{\field{\*\fldinst{HYPERLINK https://github.com/yuta-ushijima/raisetech-live8-sample-app.git }}{\fldrslt{https://github.com/yuta-ushijima/raisetech-live8-sample-app.git\ul0\cf0}}}}\f0\fs22\par
+\par
+```\par
+9. config/databese.sample.yml\'82\'cc\'95\'d2\'8f\'57\par
+\par
+```\par
+\par
+default: &default\par
+\par
+adapter: mysql2\par
+\par
+encoding: utf8mb4\par
+\par
+pool: <%= ENV.fetch("RAILS_MAX_THREADS") \{ 5 \} %>\par
+\par
+username: admin #RDS\'82\'cc\'83\'86\'81\'5b\'83\'55\'81\'5b\'96\'bc\par
+\par
+password: #RDS\'82\'cc\'83\'70\'83\'58\'83\'8f\'81\'5b\'83\'68\par
+\par
+host: #RDS\'82\'cc\'83\'47\'83\'93\'83\'68\'83\'7c\'83\'43\'83\'93\'83\'67\par
+\par
+```\par
+10.\'95\'4b\'97\'76\'82\'c8gem\'82\'f0\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+$ bundle install\par
+```\par
+11. \'83\'66\'81\'5b\'83\'5e\'83\'78\'81\'5b\'83\'58\'82\'cc\'8d\'ec\'90\'ac\'82\'c6\'83\'7d\'83\'43\'83\'4f\'83\'8c\'81\'5b\'83\'56\'83\'87\'83\'93\par
+\par
+```\par
+$ rails db:create\par
+$ rails db:migrate\par
+```\par
+12. \'83\'76\'83\'8a\'83\'52\'83\'93\'83\'70\'83\'43\'83\'8b\par
+\par
+```\par
+$ bundle exec rails assets:precompile RAILS_ENV=development\par
+```\par
+13. Rails\'83\'54\'81\'5b\'83\'6f\'81\'5b\'82\'cc\'8b\'4e\'93\'ae\par
+\par
+```\par
+$ rails s -b 0.0.0.0\par
+```\par
+##  nginx\'82\'c6unicorn\'82\'c5\'8b\'4e\'93\'ae\par
+1. Nginx\'82\'cc\'83\'43\'83\'93\'83\'58\'83\'67\'81\'5b\'83\'8b\par
+\par
+```\par
+$ sudo amazon-linux-extras install -y nginx1\par
+\par
+$ sudo systemctl start nginx.service\par
+```\par
+2. unicorn\'82\'cc\'90\'dd\'92\'e8\'8a\'6d\'94\'46\par
+\par
+```bash\par
+\par
+$ vi config/unicorn.rb\par
+\par
+```\par
+\par
+```\par
+\par
+listen '/home/ec2-user/raisetech-live8-sample-app/unicorn.sock'\par
+\par
+pid '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'\'81\'40\par
+\par
+```\par
+\par
+4. Nginx\'82\'cc\'90\'dd\'92\'e8\par
+\par
+```\par
+\par
+$ sudo vi /etc/nginx/nginx.conf\par
+\par
+```\par
+\par
+\'88\'c8\'89\'ba\'90\'dd\'92\'e8\par
+\par
+```\par
+\par
+upstream unicorn \{\par
+\par
+# Unicorn\'82\'c6\'98\'41\'8c\'67\'82\'b3\'82\'b9\'82\'e9\'82\'bd\'82\'df\'82\'cc\'90\'dd\'92\'e8\'81\'42\par
+\par
+# config/unicorn.rb\'93\'e0\'82\'ccunicorn.sock\'82\'f0\'8e\'77\'92\'e8\'82\'b7\'82\'e9\par
+\par
+server unix:/home/ec2-user/raisetech-live8-sample-app/unicorn.sock;\par
+\par
+\}\par
+\par
+server \{\par
+\par
+listen 80;\par
+\par
+server_name \'83\'43\'83\'93\'83\'58\'83\'5e\'83\'93\'83\'58ip;\par
+\par
+client_max_body_size 100m;\par
+\par
+# \'90\'da\'91\'b1\'82\'aa\'97\'88\'82\'bd\'8d\'db\'82\'ccroot\'83\'66\'83\'42\'83\'8c\'83\'4e\'83\'67\'83\'8a\par
+\par
+root /home/ec2-user/raisetech-live8-sample-app/public;\par
+\par
+try_files $uri/index.html $uri @unicorn;\par
+\par
+location @unicorn \{\par
+\par
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\par
+\par
+proxy_set_header Host $http_host;\par
+\par
+proxy_redirect off;\par
+\par
+proxy_pass {{\field{\*\fldinst{HYPERLINK http://unicorn }}{\fldrslt{http://unicorn\ul0\cf0}}}}\f0\fs22 ;\par
+\par
+\}\par
+\par
+error_page 500 502 503 504 /500.html;\par
+\par
+\}\par
+\par
+```\par
+6. unicorn\'82\'cc\'8b\'4e\'93\'ae\par
+\par
+```bash\par
+\par
+$ bundle exec unicorn_rails -c config/unicorn.rb -D\par
+\par
+```\par
+\par
+----\par
+\par
+##  ELB\'82\'f0\'92\'ca\'82\'b5\'82\'c4\'93\'ae\'8d\'ec\par
+\par
+\par
+\par
+1. \'83\'5e\'81\'5b\'83\'51\'83\'62\'83\'67\'83\'4f\'83\'8b\'81\'5b\'83\'76\'82\'c6\'83\'8d\'81\'5b\'83\'68\'83\'6f\'83\'89\'83\'93\'83\'54\'81\'5b\'82\'f0\'8d\'ec\'90\'ac\par
+\par
+2. config/environments/development.rb\'82\'c9\'8d\'ec\'90\'ac\'82\'b5\'82\'bdALB\'82\'ccDNS\'92\'c7\'89\'c1\par
+\par
+```\par
+\par
+config.hosts << "ALB\'82\'ccDNS"\par
+\par
+```\par
+##  S3\'82\'c5\'89\'e6\'91\'9c\'95\'db\'91\'b6\par
+\par
+1. S3\'83\'6f\'83\'50\'83\'62\'83\'67\'82\'cc\'8d\'ec\'90\'ac\par
+\par
+2. IAM\'83\'86\'81\'5b\'83\'55\'81\'5b\'82\'cc\'8d\'ec\'90\'ac\par
+\par
+\'81\'45 \'83\'41\'83\'4e\'83\'5a\'83\'58\'8b\'96\'89\'c2\'82\'cc\'90\'dd\'92\'e8\'82\'c5 AmazonS3FullAcces\'83\'7c\'83\'8a\'83\'56\'81\'5b\'82\'f0\'83\'41\'83\'5e\'83\'62\'83\'60\'81\'41IAM\'83\'7c\'83\'8a\'83\'56\'81\'5b\'82\'c5\'90\'a7\'8c\'e4\'82\'b7\'82\'e9\'82\'bd\'82\'df\'81\'41\'83\'6f\'83\'50\'83\'62\'83\'67\'83\'7c\'83\'8a\'83\'56\'81\'5b\'82\'cd\'8d\'a1\'89\'f1\'8e\'67\'82\'ed\'82\'c8\'82\'a2\'81\'42\par
+\par
+3. \'83\'41\'83\'76\'83\'8a\'83\'50\'81\'5b\'83\'56\'83\'87\'83\'93\'91\'a4\'82\'c5\'94\'e9\'93\'bd\'8f\'ee\'95\'f1\'82\'cc\'90\'dd\'92\'e8\par
+\par
+* config/credentials/development.yml.enc\'82\'f0\'8f\'c1\'8b\'8e\'82\'b7\'82\'e9\par
+\par
+* \'90\'56\'82\'bd\'82\'c9credentials.yml.enc\'82\'c6key\'82\'f0\'8d\'ec\'90\'ac\'82\'b5\'81\'41\'83\'41\'83\'4e\'83\'5a\'83\'58\'83\'4c\'81\'5b\'82\'cc\'93\'e0\'97\'65\'82\'f0\'8b\'4c\'8f\'71\'82\'b7\'82\'e9\par
+\par
+```\par
+\par
+$ EDITOR="vim" bin/rails credentials:edit -e development\par
+\par
+```\par
+\par
+```development.yml.enc\par
+\par
+aws:\par
+\par
+access_key_id: ******\par
+\par
+secret_access_key: ******\par
+\par
+```\par
+4. config/storage.yml\'82\'cc\'93\'e0\'97\'65\'95\'cf\'8d\'58\par
+\par
+~~~\par
+\par
+amazon:\par
+\par
+service: S3\par
+\par
+access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>\par
+\par
+secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>\par
+\par
+region: \'83\'6f\'83\'50\'83\'62\'83\'67\'82\'cc\'83\'8a\'81\'5b\'83\'57\'83\'87\'83\'93\par
+\par
+bucket: \'8d\'ec\'90\'ac\'82\'b5\'82\'bd\'83\'6f\'83\'50\'83\'62\'83\'67\'96\'bc\par
+\par
+~~~\par
+\par
+\par
+}
+ 
